@@ -14,3 +14,17 @@ sudo install -m 755  $(which node) /usr/local/bin/
 
 # Check node version
 node -v
+
+# search for packages in the npm registry directly from the terminal
+npm search file
+
+# Install NodeJS file package with npm
+sudo npm install file
+
+# Install file module with npm globally
+sudo npm install file -g
+
+# Clone NodeJS
+git clone https://github.com/contentful/the-example-app.nodejs
+
+
