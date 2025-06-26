@@ -22,4 +22,14 @@ sudo vi /lib/systemd/system/jenkins.service
 # Start Jenkins service
 sudo systemctl start jenkins
 
+# Switch user
+su - user2
+
+# Find public key in .ssh/jenkins_key.pub
+
+# Find the port in use
+curl -Lv http://localhost:8085/login 2>&1 | grep -i 'x-ssh-endpoint'
+
+# Restart Jenkins safely for user murat
+ssh -i /home/murat/.ssh/jenkins_key -l mike -p 8022 jenkins-server  safe-restart
 
