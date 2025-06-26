@@ -16,7 +16,7 @@ sudo rpm --import http://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
 # Install jenkins
 sudo yum install jenkins -y
 
-# Update the default Jenkins port change like: Environment="JENKINS_PORT=8090"
+# Update the default Jenkins port to 8090 by changing:  Environment="JENKINS_PORT=8090"
 sudo vi /lib/systemd/system/jenkins.service
 
 # Start Jenkins service
