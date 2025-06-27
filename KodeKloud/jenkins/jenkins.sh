@@ -1,3 +1,10 @@
+##### NOTES #####
+# Jenkins stores data primarily $JENKİNS_HOME
+# Main configuration file of Jenkins is: /var/lib/jenkins/config.xml
+
+
+
+##### INSTALL #####
 # Install the EPEL (Extra Packages for Enterprise Linux) repository
 sudo yum install epel-release -y
 
@@ -19,6 +26,9 @@ sudo yum install jenkins -y
 # Update the default Jenkins port to 8090 by changing:  Environment="JENKINS_PORT=8090"
 sudo vi /lib/systemd/system/jenkins.service
 
+
+
+##### RUN JENKINS #####
 # Start Jenkins service
 sudo systemctl start jenkins
 
@@ -32,4 +42,18 @@ curl -Lv http://localhost:8085/login 2>&1 | grep -i 'x-ssh-endpoint'
 
 # Restart Jenkins safely for user murat
 ssh -i /home/murat/.ssh/jenkins_key -l mike -p 8022 jenkins-server  safe-restart
+
+
+
+##### BACKUP #####
+# Create a Backup directory
+sudo mkdir /var/lib/jenkins/jenkins_backup
+
+# Set rights for backup
+sudo chown -R jenkins /var/lib/jenkins/jenkins_backup
+
+# Restart Jenkins services
+service jenkins restart
+
+
 
