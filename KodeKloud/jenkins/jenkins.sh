@@ -56,4 +56,14 @@ sudo chown -R jenkins /var/lib/jenkins/jenkins_backup
 service jenkins restart
 
 
+##### CICD PIPELINE #####
+# Install Necessary Plugins: 
+# -> Docker plugin
+# -> Docker API plugin
+# -> Docker Commons plugin
+# -> Docker Pipeline plugin
 
+# Install a new Pipeline
+# Dashboard -> New Item -> Pipeline -> Name: docker-pipeline
+# In the Pipeline section, select "Pipeline script" and paste the jenkinsfile script and save it.
+# Build Now to run the pipeline.
