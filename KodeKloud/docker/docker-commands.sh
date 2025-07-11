@@ -1,4 +1,6 @@
-# IMAGES
+##################
+##### IMAGES #####
+##################
 
 # docker images
 # This command lists all Docker images on the local machine.
@@ -16,9 +18,42 @@ docker build -t my-image .
 # This command removes a Docker image.
 docker rmi nginx:latest
 
+# Creating own image of flask from a Dockerfile
+# 1. Install OS
+# 2. Uptade apt repository
+# 3. Install dependencies 
+# 4. Install Python dependencies
+# 5. Copy application files to /opt folder
+# 6. Run the web server using flask
+
+# Example Dockerfile:
+# FROM ubuntu
+# RUN apt-get update 
+# RUN apt-get install -y python3 && python3-pip
+# RUN pip install flask
+# RUN pip install flask-mysql
+# COPY . /opt/my-flask-app
+# ENTRYPOINT FLASK_APP=/opt/my-flask-app/app.py flask run
+
+docker build dockerfile -t myasar/my-flask-app
+docker push myasar/my-flask-app
 
 
-# CONTAINERS
+# Environment Variables
+# docker run -e <key>=<value> <image>
+# This command sets environment variables in the container.
+docker run -p 38282:8080 --name blue-app -e APP_COLOR=blue -d myasar//my-web-app
+# -p: Maps a port on the host to a port in the container.
+# -e: Sets an environment variable in the container.
+# -d: Runs the container in detached mode (in the background).
+docker run -d -e MYSQL_ROOT_PASSWORD=db_pass123 --name mysql-db mysql
+docker exec -it mysql-db env
+
+
+
+######################
+##### CONTAINERS #####
+######################
 
 # docker run <image> 
 # This command is used to create and start a container from the specified image.
@@ -46,8 +81,9 @@ docker stop <container_id>
 docker rm <container_id>
 
 
-
-# COMMANDS
+####################
+##### COMMANDS #####
+####################
 
 # docker exec -it <container_id> <command>
 # This command executes a command inside a running container.
