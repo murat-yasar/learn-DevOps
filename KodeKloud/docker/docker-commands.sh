@@ -188,3 +188,45 @@ docker run --network=wp-mysql-network -e DB_Host=mysql-db -e DB_Password=db_pass
 # --link: Links the "webapp" container to the "mysql-db" container, allowing them to communicate.
 # -d: Runs the container in detached mode (in the background).
 # myasar/my-webapp-mysql: This is the image used for the web application, which is designed to connect to a MySQL database.
+
+docker network connect my-network my-container
+# This command connects an existing container "my-container" to the "my-network" network.
+docker network disconnect my-network my-container
+# This command disconnects the "my-container" from the "my-network" network.
+
+
+
+
+#######################
+### DOCKER REGISTRY ###
+#######################
+
+docker run -d -p 5000:5000 --restart=always --name my-registry registry:2
+# This command runs a Docker registry container named "my-registry" on port 5000.
+# -d: Runs the container in detached mode (in the background).
+# -p: Maps port 5000 on the host to port 5000 in the container.
+# --restart=always: Ensures the container restarts automatically if it stops or if the Docker daemon restarts.
+# registry:2: This is the Docker image for the registry, which is the official Docker registry image version 2.
+
+
+docker pull nginx:latest
+# This command pulls the latest version of the Nginx image from Docker Hub.
+docker image tag nginx:latest localhost:5000/nginx:latest
+# This command tags the Nginx image with a new name that points to the local registry.
+# localhost:5000/nginx:latest: This is the new name for the image, indicating that it should be pushed to the local registry running on port 5000.
+docker push localhost:5000/nginx:latest
+# This command pushes the tagged Nginx image to the local Docker registry at localhost:5000.
+# After this command, the Nginx image will be available in the local registry, and you can pull it from there using the command:
+# docker pull localhost:5000/nginx:latest
+# This command pulls the Nginx image from the local registry instead of Docker Hub.
+# This is useful for testing or using images in a private registry without relying on external sources.
+
+docker image prune -a
+# This command removes all unused Docker images from the local machine.
+# -a: Removes all unused images, not just dangling ones.
+
+docker pull [server-addr/image-name]
+# This command pulls a Docker image from a specified server address.
+# Example: Pull an image from a private registry at server-addr.
+docker pull localhost:5000/nginx
+# This command pulls the Nginx image from the local registry running on port 5000.
