@@ -13,6 +13,7 @@ docker pull nginx:latest
 # docker build -t <image_name> .
 # This command builds a Docker image from a Dockerfile in the current directory.
 docker build -t my-image .
+# -t: Specifies the name and optionally a tag for the image.
 
 # docker rmi <image>
 # This command removes a Docker image.
@@ -51,6 +52,8 @@ docker exec -it mysql-db env
 
 
 
+
+
 ######################
 ##### CONTAINERS #####
 ######################
@@ -81,6 +84,9 @@ docker stop <container_id>
 docker rm <container_id>
 
 
+
+
+
 ####################
 ##### COMMANDS #####
 ####################
@@ -109,3 +115,28 @@ docker inspect <container_id>
 # docker logs <container_id>
 # This command retrieves the logs from a running or stopped container.
 docker logs <container_id>
+
+
+
+
+
+#####################
+### DOCKER ENGINE ###
+#####################
+
+# This command limits the container to use only 0.5 CPU cores.
+docker run --cpus=.5 ubuntu
+
+docker run --memory=512m ubuntu
+# This command limits the container to use only 512 MB of memory.
+
+
+
+
+#################
+#### VOLUMES ####
+#################
+
+docker run -v data_volume:/var/lib/mysql mysql
+# This command mounts a named volume "data_volume" to the container's /var/lib/mysql
+# -v: Mounts a volume from the host to the container.
