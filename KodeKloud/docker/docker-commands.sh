@@ -148,3 +148,43 @@ docker run -v /opt/data:/var/lib/mysql -d --name mysql-db -e MYSQL_ROOT_PASSWORD
 # -v: Mounts a volume from the host to the container.
 # -d: Runs the container in detached mode (in the background).
 # -e: Sets an environment variable in the container.
+
+
+
+
+#################
+#### NETWORK ####
+#################
+
+docker run --name alpine-2 --network=none alpine
+# This command runs a container named "alpine-2" in the "none" network mode, which means it has no network connectivity.
+
+docker network ls
+# This command lists all Docker networks.
+
+docker network create my_network
+# This command creates a new Docker network named "my_network".
+# Example: Create a network for a web application and a database to communicate.
+docker network create --driver bridge --subnet 182.18.0.0/24 --gateway 182.18.0.1 wp-mysql-network
+# This command creates a new Docker network named "wp-mysql-network" with a custom bridge driver, subnet, and gateway.
+# --driver: Specifies the network driver to use (in this case, "bridge").
+# --subnet: Specifies the subnet for the network.
+# --gateway: Specifies the gateway for the network.
+
+docker network inspect my_network
+# This command retrieves detailed information about the "my_network".
+# Example: Inspect the network to see which containers are connected to it.
+docker network inspect wp-mysql-network
+
+docker run -d -e MYSQL_ROOT_PASSWORD=db_pass123 --name mysql-db --network wp-mysql-network mysql:5.7
+# This command runs a MySQL container named "mysql-db" in the "wp-mysql-network" network with a specified root password.
+
+docker run --network=wp-mysql-network -e DB_Host=mysql-db -e DB_Password=db_pass123 -p 38080:8080 --name webapp --link mysql-db:mysql-db -d myasar/my-webapp-mysql
+# This command runs a web application container named "webapp" in the "wp-mysql-network" network, linking it to the "mysql-db" container.
+# --network: Specifies the network to connect the container to.
+# -e: Sets environment variables in the container (e.g., DB_Host and DB_Password).
+# -p: Maps a port on the host to a port in the container (38080 on the host to 8080 in the container).
+# --name: Assigns a name to the container for easier reference.
+# --link: Links the "webapp" container to the "mysql-db" container, allowing them to communicate.
+# -d: Runs the container in detached mode (in the background).
+# myasar/my-webapp-mysql: This is the image used for the web application, which is designed to connect to a MySQL database.
