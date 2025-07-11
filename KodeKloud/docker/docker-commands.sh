@@ -1,3 +1,5 @@
+# var/lib/docker # This is the default directory where Docker stores its data, including images, containers, and volumes.
+
 ##################
 ##### IMAGES #####
 ##################
@@ -140,3 +142,9 @@ docker run --memory=512m ubuntu
 docker run -v data_volume:/var/lib/mysql mysql
 # This command mounts a named volume "data_volume" to the container's /var/lib/mysql
 # -v: Mounts a volume from the host to the container.
+
+docker run -v /opt/data:/var/lib/mysql -d --name mysql-db -e MYSQL_ROOT_PASSWORD=db_pass123 mysql
+# This command mounts a host directory /opt/data to the container's /var/lib/mysql
+# -v: Mounts a volume from the host to the container.
+# -d: Runs the container in detached mode (in the background).
+# -e: Sets an environment variable in the container.
