@@ -1,5 +1,5 @@
 ##################################
-### CLUSTER & NODE MANAGEMENET ###
+### Cluster & Node Management ###
 ##################################
 
 kubectl cluster-info    # Display cluster information
@@ -10,7 +10,7 @@ kubectl top nodes       # Display resource usage of nodes
 
 
 ######################
-### POD OPERATIONS ###
+### Pod Operations ###
 ######################
 
 kubectl get pods                          # List all pods in the current namespace
@@ -21,8 +21,9 @@ kubectl exec -it <pod-name> -- /bin/sh    # Execute a command in a running pod
 kubectl delete pod <pod-name>             # Delete a specific pod
 
 
+
 ############################
-### DEPLOYMENT & SCALING ###
+### Deployment & Scaling ###
 ############################
 
 kubectl get deployments                                           # List all deployments in the current namespace
@@ -38,7 +39,7 @@ kubectl delete deployment <deployment-name>                       # Delete a spe
 
 
 #############################
-### SERVICES & NETWORKING ###
+### Services & Networking ###
 #############################
 
 kubectl get services                                                       # List all services in the current namespace
@@ -55,9 +56,40 @@ kubectl delete ingress <ingress-name>                                      # Del
 
 
 
-
 ############################
-### CONFIGMAPS & SECRETS ###
+### ConfigMaps & Secrets ###
 ############################
 
+kubectl get configmaps                                         # Lists all ConfigMaps
+kubectl create configmap <name> --from-file=file.properties    # Creates a ConfigMap from a file
+kubectl get secrets                                            # Lists all secrets
+kubectl create secret generic <name> --from-literal=key=value  # Creates a secret
 
+
+
+##################
+### Namespaces ###
+##################
+
+kubectl get namespaces                                      # Lists all namespaces
+kubectl create namespace <ns-name>                          # Creates a new namespace
+kubectl config set-context --current --namespace=<ns-name>  # Switches the current namespace
+
+
+
+###########################
+### Applying YAML Files ###
+###########################
+
+kubectl apply -f file.yaml    # Applies a configuration from a YAML file
+kubectl delete -f file.yaml   # Deletes resources defined in a YAML file
+
+
+
+####################################
+### ADebugging & Troubleshooting ###
+####################################
+
+kubectl get events --sort-by=.metadata.creationTimestamp	   # Shows cluster events in order
+kubectl top pod	                                          # Displays CPU/memory usage of pods
+kubectl cp <pod-name>:/path/to/file ./local-path	         # Copies files from a pod to local
