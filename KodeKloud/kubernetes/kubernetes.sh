@@ -59,5 +59,3 @@ kubectl delete ingress <ingress-name>                                      # Del
 ############################
 ### CONFIGMAPS & SECRETS ###
 ############################
-
-
