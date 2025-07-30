@@ -61,3 +61,4 @@ kubectl create -f service-definition.yaml    # Create a service from a yaml file
 kubectl get services                         # List the services
 kubectl get svc                              # List the services (shortcut)
 minikube service myapp-service --url         # show the url to the service
+kubectl describe service                     # Get the details of the service
