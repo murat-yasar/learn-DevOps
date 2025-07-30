@@ -1,4 +1,4 @@
-kubectl create -f pod.yaml       # Create a pod from a yaml file
+kubectl create -f pod.yaml       # Create a pod from a yaml file. -f: from the file
 kubectl apply -f pod.yaml        # Applies a configuration from a YAML file
 kubectl get pods                 # List all pods
 kubectl describe pod nginx       # Get the detailed information about a pod
@@ -18,7 +18,7 @@ kubectl apply -f redis-definition.yaml          # Update the image
 kubectl create -f replica-controller.yaml       # Create myapp-rc replicationcontroller
 kubectl get replicationcontroller               # List replicas
 
-# Replicaset
+# Replicasets
 kubectl create -f replicaset.yaml               # Create myapp-rc replicaset
 kubectl get replicaset                          # List replicasets
 kubectl replace -f replicaset.yaml              # Update the replicaset
@@ -34,3 +34,11 @@ kubectl get deployments                         # List deployments
 kubectl get pods                                # List the pods
 kubectl describe deployment myapp-deployment    # Get the details of a deployment
 kubectl explain deployment | head -n3           # Gets the error for the deployment
+
+# Rollouts
+kubectl apply -f deployment-definition.yaml                       # Apply the new deployment
+kubectl apply -f deployment-definition.yaml --record              # Apply the new deployment keeping track of the change reasons
+kubectl set image deployment/myapp-deployment nginx=nginx:1.9.1   # Set the image of the deployment
+kubectl rollout status deployment/myapp-deployment                # See the status of the deployment
+kubectl rollout history deployment/myapp-deployment               # Check the history of the deployment
+kubectl rollout undo deployment/myapp-deployment                  # Roll-back to a deployment operation
