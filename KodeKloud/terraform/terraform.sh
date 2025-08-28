@@ -2,3 +2,4 @@ terraform init    # Initialize Terraform working directory and download required
 terraform plan    # Create an execution plan showing what changes Terraform will make
 terraform apply   # Apply the changes required to reach the desired infrastructure state
 terraform show    # Inspect the current state or saved plan file
+terraform destroy # Delete all infrastructure resources that are managed by the Terraform configuration
